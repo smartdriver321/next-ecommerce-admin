@@ -1,7 +1,10 @@
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import React from 'react'
 
 export default function Nav() {
+  const router = useRouter()
+  const { pathname } = router
   const inactiveLink = 'flex gap-1 p-1'
   const activeLink = inactiveLink + ' bg-white text-blue-900 rounded-l-lg'
 
@@ -25,7 +28,10 @@ export default function Nav() {
         <span className=''>Ecommerce-Admin</span>
       </Link>
       <nav className='flex flex-col gap-2'>
-        <Link href={'/'} className={activeLink}>
+        <Link
+          href={'/'}
+          className={pathname === '/' ? activeLink : inactiveLink}
+        >
           <svg
             xmlns='http://www.w3.org/2000/svg'
             fill='none'
@@ -43,7 +49,10 @@ export default function Nav() {
           Dashboard
         </Link>
 
-        <Link href={'/products'} className={inactiveLink}>
+        <Link
+          href={'/products'}
+          className={pathname.includes('/products') ? activeLink : inactiveLink}
+        >
           <svg
             xmlns='http://www.w3.org/2000/svg'
             fill='none'
@@ -61,7 +70,10 @@ export default function Nav() {
           Products
         </Link>
 
-        <Link href={'/orders'} className={inactiveLink}>
+        <Link
+          href={'/orders'}
+          className={pathname.includes('/orders') ? activeLink : inactiveLink}
+        >
           <svg
             xmlns='http://www.w3.org/2000/svg'
             fill='none'
@@ -79,7 +91,10 @@ export default function Nav() {
           Orders
         </Link>
 
-        <Link href={'/settings'} className={inactiveLink}>
+        <Link
+          href={'/settings'}
+          className={pathname.includes('/settings') ? activeLink : inactiveLink}
+        >
           <svg
             xmlns='http://www.w3.org/2000/svg'
             fill='none'
