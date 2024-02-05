@@ -19,15 +19,20 @@ export default async function handle(req, res) {
   }
 
   if (method === 'PUT') {
-    const { name, parentCategory, properties, _id } = req.body
+    const { _id, name, parentCategory } = req.body
     const categoryDoc = await Category.updateOne(
       { _id },
       {
         name,
         parent: parentCategory || undefined,
-        properties,
       }
     )
     res.json(categoryDoc)
+  }
+
+  if (method === 'DELETE') {
+    const { _id } = req.query
+    await Category.deleteOne({ _id })
+    res.json('OK')
   }
 }
